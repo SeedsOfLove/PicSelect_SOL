@@ -1,0 +1,2 @@
+include ':app', ':picselectlib'
+rootProject.name='PicSelect_SOL'
