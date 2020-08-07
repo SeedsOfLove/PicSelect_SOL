@@ -542,6 +542,15 @@ public class PhotoPickerActivity extends AppCompatActivity
     * */
     private LoaderManager.LoaderCallbacks<Cursor> mLoaderCallback = new LoaderManager.LoaderCallbacks<Cursor>()
     {
+        /*
+        *
+        *   MediaStore是android系统提供的一个多媒体数据库，专门用于存放多媒体信息的
+        *   MediaStore.Files: 共享的文件,包括多媒体和非多媒体信息
+        *   MediaStore.Audio: 存放音频信息
+        *   MediaStore.Image: 存放图片信息
+        *   MediaStore.Vedio: 存放视频信息
+        *
+        * */
         //读取图片文件的参数
         private final String[] IMAGE_PROJECTION =
                 {
@@ -593,6 +602,21 @@ public class PhotoPickerActivity extends AppCompatActivity
 
             if (id == LOADER_ALL)           //全部加载
             {
+                /*
+                *   CursorLoader构造方法的参数说明
+                *
+                *   context ： 上下文
+                *   uri : 要访问数据库的 uri地址
+                *   projection ： 对应于数据库语句里的某列， 如果只需要访问某几列， 则传入这几列的名字即可，
+                *                 如果不传， 则默认访问全部数据。例如 学生对象， 有：name，number，age，sex 等，
+                *                 如果只需要查询姓名和学号， 则传入[“name”，“number”]即可。
+                *   selection ：一些特殊的筛选条件，比如要求年龄大于10， 则传入 “age > ?”
+                *   selectionArgs: 传入具体的参数， 会替换上述 selection中的“?”
+                *   sortOrder： 排序规则， 可以为空
+                *
+                *   （可以理解为对数据库操作，增删改查）
+                *
+                * */
                 CursorLoader cursorLoader = new CursorLoader(mContext,
                                                             MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
                                                             IMAGE_PROJECTION,
