@@ -551,6 +551,7 @@ public class PhotoPickerActivity extends AppCompatActivity
                         MediaStore.Images.Media._ID
                 };
 
+        //实例化并返回一个新创建给指定ID的Loader对象，第一次创建时回调
         @Override
         public Loader<Cursor> onCreateLoader(int id, Bundle args)
         {
@@ -623,7 +624,7 @@ public class PhotoPickerActivity extends AppCompatActivity
             return null;
         }
 
-        //加载完成调用此方法
+        //数据load完成之后回调此方法
         @Override
         public void onLoadFinished(Loader<Cursor> loader, Cursor data)
         {
@@ -688,6 +689,7 @@ public class PhotoPickerActivity extends AppCompatActivity
             }
         }
 
+        //当创建好的Loader被reset时调用此方法，重新清楚绑定好的数据，重新加载数据
         @Override
         public void onLoaderReset(Loader<Cursor> loader)
         {
