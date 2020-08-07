@@ -539,17 +539,20 @@ public class PhotoPickerActivity extends AppCompatActivity
     * 一个Activity或者Fragment只能有一个LoadManager。
     * LoaderManager管理Loader的初始化，重启和销毁操作。
     *
+    *
+    * onCreateLoader()相当于一个被观察者，
+    * onLoadFinished()相当于一个观察者，
+    * 只要被观察者的数据有改变，那么观察者就能得到通知，并进行相应的响应。
+    *
     * */
     private LoaderManager.LoaderCallbacks<Cursor> mLoaderCallback = new LoaderManager.LoaderCallbacks<Cursor>()
     {
         /*
-        *
         *   MediaStore是android系统提供的一个多媒体数据库，专门用于存放多媒体信息的
         *   MediaStore.Files: 共享的文件,包括多媒体和非多媒体信息
         *   MediaStore.Audio: 存放音频信息
         *   MediaStore.Image: 存放图片信息
         *   MediaStore.Vedio: 存放视频信息
-        *
         * */
         //读取图片文件的参数
         private final String[] IMAGE_PROJECTION =
