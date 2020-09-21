@@ -1,8 +1,14 @@
 # PicSelect_SOL
 图片选择器
 
->此工具是仿照微信发布朋友圈中的图片选择功能  
+>此工具是仿照微信发布朋友圈中的图片选择功能
+
 > 可拍照或选择本地相册
+
+> 预览本地照片
+
+> 预览网络图片（保存本地、分享）
+
 
 **效果展示**
 
@@ -22,6 +28,6 @@ allprojects {
 ### Step 2. Add the dependency
 ```
 dependencies {
-        implementation 'com.github.SeedsOfLove:PicSelect_SOL:1.0.1'
+        implementation 'com.github.SeedsOfLove:PicSelect_SOL:1.0.2'
 	}
 ```

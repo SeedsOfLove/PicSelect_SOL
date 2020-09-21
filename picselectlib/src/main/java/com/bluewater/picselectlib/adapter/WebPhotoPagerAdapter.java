@@ -29,7 +29,8 @@ public class WebPhotoPagerAdapter extends PagerAdapter
     private List<String> mImgUrls;                 //所有预览照片地址
     private LayoutInflater mLayoutInflater;
 
-    public PhotoViewClickListener listener;         //点击事件监听
+    public PhotoViewClickListener mListener;                //点击事件监听
+    public PhotoViewLongClickListener mListenerLong;        //长按事件监听
 
     public WebPhotoPagerAdapter(Context mContext, List<String> imgUrls)
     {
@@ -68,10 +69,25 @@ public class WebPhotoPagerAdapter extends PagerAdapter
             @Override
             public void onPhotoTap(View view, float x, float y)
             {
-                if (listener != null)
+                if (mListener != null)
                 {
-                    listener.OnPhotoTapListener(view, x, y);
+                    mListener.OnPhotoTapListener(view, x, y);
                 }
+            }
+        });
+
+        //图片长按事件
+        imageView.setOnLongClickListener(new View.OnLongClickListener()
+        {
+            @Override
+            public boolean onLongClick(View view)
+            {
+                if (mListenerLong != null)
+                {
+                    mListenerLong.OnPhotoLongTapListener(view);
+                }
+
+                return false;
             }
         });
 
@@ -110,7 +126,16 @@ public class WebPhotoPagerAdapter extends PagerAdapter
      */
     public void setPhotoViewClickListener(PhotoViewClickListener listener)
     {
-        this.listener = listener;
+        this.mListener = listener;
+    }
+
+    /**
+     * 设置预览图片长按事件
+     * @param listener
+     */
+    public void setPhotoViewLongClickListener(PhotoViewLongClickListener listener)
+    {
+        this.mListenerLong = listener;
     }
 
     /**
@@ -119,5 +144,13 @@ public class WebPhotoPagerAdapter extends PagerAdapter
     public interface PhotoViewClickListener
     {
         void OnPhotoTapListener(View view, float v, float v1);
+    }
+
+    /**
+     * 照片点击事件接口
+     */
+    public interface PhotoViewLongClickListener
+    {
+        void OnPhotoLongTapListener(View view);
     }
 }

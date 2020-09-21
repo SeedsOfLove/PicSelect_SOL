@@ -17,22 +17,30 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
-            android:gravity="right"
             android:background="#A9000000">
 
             <ImageView
-                android:id="@+id/iv_download"
+                android:id="@+id/iv_web_photo_preview_share"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+                android:layout_alignParentLeft="true"
+                android:src="@mipmap/pic_select_share"/>
+
+            <ImageView
+                android:id="@+id/iv_web_photo_preview_download"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_alignParentRight="true"
                 android:src="@mipmap/pic_select_download"/>
 
-        </LinearLayout>
+        </RelativeLayout>
 
     </RelativeLayout>
 
