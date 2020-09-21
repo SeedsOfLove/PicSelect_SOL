@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.Toast;
 
@@ -49,6 +50,8 @@ public class MainActivity extends AppCompatActivity
     private GridView gridView;
     private GridAdapter gridAdapter;
 
+    private Button btn_PreviewWebImg;
+
     private ArrayList<String> imagePaths;       // 已选中的照片地址， 用于回显选中状态
 
     @Override
@@ -66,6 +69,17 @@ public class MainActivity extends AppCompatActivity
         imagePaths.add(ADD_PIC_TAG);
 
         checkPermissions();
+
+        btn_PreviewWebImg = findViewById(R.id.btn_web_img);
+        btn_PreviewWebImg.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(mContext, WebImagePreviewActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     /**

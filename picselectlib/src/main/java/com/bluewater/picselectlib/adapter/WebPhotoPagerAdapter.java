@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.bluewater.picselectlib.R;
@@ -13,39 +14,39 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.transition.DrawableCrossFadeFactory;
 
-import java.io.File;
 import java.util.List;
 
 import uk.co.senab.photoview.PhotoView;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
 /**
- * 预览照片的Adapter
+ * 预览网络照片的Adapter
  */
-public class PhotoPagerAdapter extends PagerAdapter
+public class WebPhotoPagerAdapter extends PagerAdapter
 {
     private Context mContext;
 
-    private List<String> paths;                 //所有预览照片的路径
+    private List<String> mImgUrls;                 //所有预览照片地址
     private LayoutInflater mLayoutInflater;
 
-    public PhotoViewClickListener listener; //点击事件监听
+    public PhotoViewClickListener listener;         //点击事件监听
 
-    public PhotoPagerAdapter(Context mContext, List<String> paths)
+    public WebPhotoPagerAdapter(Context mContext, List<String> imgUrls)
     {
         this.mContext = mContext;
-        this.paths = paths;
+        this.mImgUrls = imgUrls;
         mLayoutInflater = LayoutInflater.from(mContext);
     }
 
+    @NonNull
     @Override
-    public Object instantiateItem(ViewGroup container, int position)
+    public Object instantiateItem(@NonNull ViewGroup container, int position)
     {
         View itemView = mLayoutInflater.inflate(R.layout.item_preview, container, false);
         PhotoView imageView = itemView.findViewById(R.id.pv_preview_pager);     //照片显示控件
 
-        String path = paths.get(position);          //当前预览照片的路径
-        Uri uri = Uri.fromFile(new File(path));     //本地图片的URI
+        String url = mImgUrls.get(position);    //当前预览照片的网络地址
+        Uri uri = Uri.parse(url);               //网络图片的URI
 
         //淡入淡出动画效果
         DrawableCrossFadeFactory drawableCrossFadeFactory =
@@ -65,11 +66,11 @@ public class PhotoPagerAdapter extends PagerAdapter
         imageView.setOnPhotoTapListener(new PhotoViewAttacher.OnPhotoTapListener()
         {
             @Override
-            public void onPhotoTap(View view, float v, float v1)
+            public void onPhotoTap(View view, float x, float y)
             {
                 if (listener != null)
                 {
-                    listener.OnPhotoTapListener(view, v, v1);
+                    listener.OnPhotoTapListener(view, x, y);
                 }
             }
         });
@@ -79,27 +80,26 @@ public class PhotoPagerAdapter extends PagerAdapter
         return itemView;
     }
 
-
     @Override
     public int getCount()
     {
-        return paths.size();
+        return mImgUrls.size();
     }
 
     @Override
-    public boolean isViewFromObject(View view, Object object)
+    public boolean isViewFromObject(@NonNull View view, @NonNull Object object)
     {
         return view == object;
     }
 
     @Override
-    public void destroyItem(ViewGroup container, int position, Object object)
+    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object)
     {
         container.removeView((View) object);
     }
 
     @Override
-    public int getItemPosition(Object object)
+    public int getItemPosition(@NonNull Object object)
     {
         return POSITION_NONE;
     }
@@ -120,5 +120,4 @@ public class PhotoPagerAdapter extends PagerAdapter
     {
         void OnPhotoTapListener(View view, float v, float v1);
     }
-
 }

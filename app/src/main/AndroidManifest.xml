@@ -13,8 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,15 +22,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name="com.bluewater.picselectlib.activity.PhotoPickerActivity"
-            android:theme="@style/PhotoPickerTheme"
-            android:configChanges="orientation|screenSize"/>
-
-        <activity android:name="com.bluewater.picselectlib.activity.PhotoPreviewActivity"
-            android:theme="@style/PhotoPickerTheme"/>
-
-
+        <activity
+            android:name="com.bluewater.picselectlib.activity.PhotoPickerActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/PhotoPickerTheme" />
+        <activity
+            android:name="com.bluewater.picselectlib.activity.PhotoPreviewActivity"
+            android:theme="@style/PhotoPickerTheme" />
+        <activity android:name=".WebImagePreviewActivity"/>
+        <activity
+            android:name="com.bluewater.picselectlib.activity.WebPhotoPreviewActivity"
+            android:theme="@style/PhotoPickerTheme" />
     </application>
 
 </manifest>

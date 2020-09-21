@@ -22,6 +22,6 @@ allprojects {
 ### Step 2. Add the dependency
 ```
 dependencies {
-        implementation 'com.github.SeedsOfLove:PicSelect_SOL:1.0.0'
+        implementation 'com.github.SeedsOfLove:PicSelect_SOL:1.0.1'
 	}
 ```

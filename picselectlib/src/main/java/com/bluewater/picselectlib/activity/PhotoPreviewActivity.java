@@ -21,6 +21,9 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
+/**
+ * 本地照片预览
+ */
 public class PhotoPreviewActivity extends AppCompatActivity implements PhotoPagerAdapter.PhotoViewClickListener
 {
     /*  Intent传参   */
@@ -96,7 +99,7 @@ public class PhotoPreviewActivity extends AppCompatActivity implements PhotoPage
         mPagerAdapter.setPhotoViewClickListener(this);              //设置预览图片点击事件
         mViewPager.setAdapter(mPagerAdapter);
 
-        mViewPager.setCurrentItem(currentItem);     //跳转到制定页面
+        mViewPager.setCurrentItem(currentItem);     //跳转到指定页面
         mViewPager.setOffscreenPageLimit(5);        //设置预加载页面数量
     }
 
@@ -129,6 +132,14 @@ public class PhotoPreviewActivity extends AppCompatActivity implements PhotoPage
     }
 
     /**
+     * 更新标题
+     */
+    public void updateActionBarTitle()
+    {
+        getSupportActionBar().setTitle(getString(R.string.image_index, mViewPager.getCurrentItem() + 1, paths.size()));
+    }
+
+    /**
      * 预览图片点击事件
      * @param view
      * @param v
@@ -138,14 +149,6 @@ public class PhotoPreviewActivity extends AppCompatActivity implements PhotoPage
     public void OnPhotoTapListener(View view, float v, float v1)
     {
         onBackPressed();
-    }
-
-    /**
-     * 更新标题
-     */
-    public void updateActionBarTitle()
-    {
-        getSupportActionBar().setTitle(getString(R.string.image_index, mViewPager.getCurrentItem() + 1, paths.size()));
     }
 
     /**
@@ -168,7 +171,6 @@ public class PhotoPreviewActivity extends AppCompatActivity implements PhotoPage
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
-
         if (item.getItemId() == android.R.id.home)   //ToolBar左上角返回按钮
         {
             onBackPressed();

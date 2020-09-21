@@ -40,6 +40,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 照片选择
+ */
 public class PhotoPickerActivity extends AppCompatActivity
 {
     public static final String TAG = "PhotoPickerActivity";
