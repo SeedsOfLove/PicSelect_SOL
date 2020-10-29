@@ -36,7 +36,6 @@ import com.bluewater.picselectlib.R;
 import com.bluewater.picselectlib.intent.PhotoPreviewIntent;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
