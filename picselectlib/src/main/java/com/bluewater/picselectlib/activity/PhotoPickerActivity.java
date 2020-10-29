@@ -125,14 +125,14 @@ public class PhotoPickerActivity extends AppCompatActivity
         mImageConfig = getIntent().getParcelableExtra(EXTRA_IMAGE_CONFIG);                      // 筛选照片配置信息
 
         // 默认已选择的照片
-//        if (mSelectmode == MODE_MULTI)
-//        {
-//            ArrayList<String> pathTmp = getIntent().getStringArrayListExtra(EXTRA_DEFAULT_SELECTED_LIST);   //获取已经选择的照片路径
-//            if (pathTmp != null && pathTmp.size() > 0)
-//            {
-//                 imagePathList.addAll(pathTmp);
-//            }
-//        }
+        if (mSelectmode == MODE_MULTI)
+        {
+            ArrayList<String> pathTmp = getIntent().getStringArrayListExtra(EXTRA_DEFAULT_SELECTED_LIST);   //获取已经选择的照片路径
+            if (pathTmp != null && pathTmp.size() > 0)
+            {
+                 imagePathList.addAll(pathTmp);
+            }
+        }
     }
 
     /**

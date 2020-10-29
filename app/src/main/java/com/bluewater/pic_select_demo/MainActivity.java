@@ -24,8 +24,6 @@ import com.bluewater.picselectlib.SelectModel;
 import com.bluewater.picselectlib.intent.PhotoPickerIntent;
 import com.bluewater.picselectlib.intent.PhotoPreviewIntent;
 
-import org.json.JSONArray;
-
 import java.util.ArrayList;
 
 /**
@@ -42,7 +40,7 @@ public class MainActivity extends AppCompatActivity
 
     private static final int REQUEST_PERMISSION_CODE = 101;
 
-    private static final int MAX_PIC = 6;     //支持的照片最大选择数
+    private static final int MAX_PIC = 9;     //支持的照片最大选择数
 
     private Context mContext;
     private Activity mActivity;
