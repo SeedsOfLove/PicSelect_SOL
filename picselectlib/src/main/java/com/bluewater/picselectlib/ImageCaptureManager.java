@@ -51,9 +51,9 @@ public class ImageCaptureManager
 
             if (photoFile != null)
             {
-
                 //判断版本号，N(API24)以上拍照调用方式不一样
                 int currentApiVersion = Build.VERSION.SDK_INT;
+
                 if (currentApiVersion < Build.VERSION_CODES.N)
                 {
                     Uri uri = Uri.fromFile(photoFile);
@@ -62,9 +62,11 @@ public class ImageCaptureManager
                 else
                 {
                     //访问媒体库的内容提供器接口
+                    ContentResolver resolver = mContext.getContentResolver();
+
                     ContentValues contentValues = new ContentValues(1);
                     contentValues.put(MediaStore.Images.Media.DATA, photoFile.getAbsolutePath());
-                    ContentResolver resolver = mContext.getContentResolver();
+
                     Uri uri = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues); //插入数据
 
                     intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);

@@ -430,6 +430,25 @@ public class PhotoPickerActivity extends AppCompatActivity
                     break;
             }
         }
+        else if (resultCode == RESULT_CANCELED)    //按返回键返回
+        {
+            switch (requestCode)
+            {
+                // 删除未拍照生成的临时文件
+                case ImageCaptureManager.REQUEST_TAKE_PHOTO:
+                    String tempPath = captureManager.getCurrentPhotoPath();
+                    if (tempPath != null)
+                    {
+                        captureManager.galleryAddPic();
+                        File tempFile = new File(tempPath);
+                        if (tempFile.exists() && tempFile.isFile())
+                        {
+                            tempFile.delete();
+                        }
+                    }
+                    break;
+            }
+        }
     }
 
     /**
