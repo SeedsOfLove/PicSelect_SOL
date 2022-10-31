@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:ignore="ResourceName">
 
-    <uk.co.senab.photoview.PhotoView
+    <com.github.chrisbanes.photoview.PhotoView
         android:id="@+id/pv_preview_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

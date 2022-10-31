@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
@@ -13,11 +14,11 @@ import com.bluewater.picselectlib.R;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.transition.DrawableCrossFadeFactory;
+import com.github.chrisbanes.photoview.OnPhotoTapListener;
+import com.github.chrisbanes.photoview.PhotoView;
+import com.github.chrisbanes.photoview.PhotoViewAttacher;
 
 import java.util.List;
-
-import uk.co.senab.photoview.PhotoView;
-import uk.co.senab.photoview.PhotoViewAttacher;
 
 /**
  * 预览网络照片的Adapter
@@ -64,10 +65,10 @@ public class WebPhotoPagerAdapter extends PagerAdapter
                 .into(imageView);
 
         //图片点击事件
-        imageView.setOnPhotoTapListener(new PhotoViewAttacher.OnPhotoTapListener()
+        imageView.setOnPhotoTapListener(new OnPhotoTapListener()
         {
             @Override
-            public void onPhotoTap(View view, float x, float y)
+            public void onPhotoTap(ImageView view, float x, float y)
             {
                 if (mListener != null)
                 {

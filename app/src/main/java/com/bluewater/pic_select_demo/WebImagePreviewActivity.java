@@ -35,11 +35,11 @@ public class WebImagePreviewActivity extends AppCompatActivity
         gridView = findViewById(R.id.gridView_web_img);
 
         imageUrls = new ArrayList<>();
-        imageUrls.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1600668847206&di=7d552a62264b6d7d386a41200a15da23&imgtype=0&src=http%3A%2F%2Fm.360buyimg.com%2Fpop%2Fjfs%2Ft25168%2F33%2F166786854%2F85434%2F1f2b7808%2F5b681c1fn4f745897.jpg");
-        imageUrls.add("https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3222531102,37124484&fm=26&gp=0.jpg");
-        imageUrls.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1600668901375&di=0483f9815b3c34289e1a12fee837747a&imgtype=0&src=http%3A%2F%2Fimages.china.cn%2Fattachement%2Fjpg%2Fsite1000%2F20150818%2F7427ea210951173d703e2b.jpg");
-        imageUrls.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1600668915220&di=800764cfe7a605c36070238b4b855f90&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201511%2F28%2F20151128201007_8xjPf.jpeg");
-        imageUrls.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1600668929162&di=aa0ac3c08483f9470c3bd9ac55906ae4&imgtype=0&src=http%3A%2F%2Ff.hiphotos.baidu.com%2Fzhidao%2Fwh%253D450%252C600%2Fsign%3D3c89fa31544e9258a6618eeaa9b2fd6e%2Fb7003af33a87e9500080e13912385343faf2b4cb.jpg");
+        imageUrls.add("https://img1.baidu.com/it/u=4269599166,108953845&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=333");
+        imageUrls.add("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fup.enterdesk.com%2Fphoto%2F2009-2-11%2F200902061824471888.jpg&refer=http%3A%2F%2Fup.enterdesk.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1669778229&t=e0c19d180eb81fb0f415eac381304bdf");
+        imageUrls.add("https://pics3.baidu.com/feed/8435e5dde71190efa21876ceada11f10fcfa6005.jpeg?token=34296e70d2b35d79c557abb1dc6f60c6");
+        imageUrls.add("https://img1.baidu.com/it/u=8735185,775478860&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500");
+        imageUrls.add("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fwww.2008php.com%2F2015_Website_appreciate%2F2015-03-26%2F20150326005538vOVzfvOVzf.jpg&refer=http%3A%2F%2Fwww.2008php.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1669778229&t=a89c26358a0c791a3d8a5448e2c73ebf");
 
         initGridView();
     }
