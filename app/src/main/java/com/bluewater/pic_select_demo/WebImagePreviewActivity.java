@@ -57,6 +57,7 @@ public class WebImagePreviewActivity extends AppCompatActivity
                 WebPhotoPreviewIntent intent = new WebPhotoPreviewIntent(mContext);
                 intent.setCurrentItem(position);                            //跳转到指定预览的照片
                 intent.setPhotoPaths(imageUrls);                           //若没有等于最大选择数，此imagePaths就会包含ADD_PIC_TAG
+                intent.showToolBar(false);                           //隐藏底部工具栏
                 startActivity(intent);
             }
         });

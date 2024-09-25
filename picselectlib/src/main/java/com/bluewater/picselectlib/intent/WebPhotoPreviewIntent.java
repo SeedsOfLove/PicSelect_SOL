@@ -37,4 +37,14 @@ public class WebPhotoPreviewIntent extends Intent
     {
         this.putExtra(WebPhotoPreviewActivity.EXTRA_CURRENT_ITEM, currentItem);
     }
+
+    /**
+     * 是否显示底部工具栏
+     *
+     * @param flag
+     */
+    public void showToolBar(boolean flag)
+    {
+        this.putExtra(WebPhotoPreviewActivity.EXTRA_SHOW_TOOLBAR, flag);
+    }
 }

@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,6 +36,7 @@ public class WebPhotoPreviewActivity extends AppCompatActivity
 {
     public static final String EXTRA_PHOTOS = "extra_photos";                   //所有预览的照片，ArrayList<String>类型
     public static final String EXTRA_CURRENT_ITEM = "extra_current_item";       //当前图片下标，int类型
+    public static final String EXTRA_SHOW_TOOLBAR = "extra_show_toolbar";       //显示底部工具栏，boolean类型
 
     private Context mContext;
     private Activity mActivity;
@@ -42,12 +44,15 @@ public class WebPhotoPreviewActivity extends AppCompatActivity
     private ViewPagerFixed mViewPager;              //图片预览展示控件ViewPager
     private WebPhotoPagerAdapter mPagerAdapter;     //adapter
 
+    private RelativeLayout rlToolbar;
     private ImageView ivShare;
     private ImageView ivDownLoad;
 
     private ArrayList<String> imgUrls;      //图片地址
 
     private int currentItem = 0;        //当前图片下标，默认为0
+
+    private boolean showToolbar = true;        //显示底部工具栏，，默认为显示
 
     //长按消息弹出删除框，根据activity的touchEvent计算,x y 轴坐标，删除框在点击的坐标显示
     private int x = 0;
@@ -80,6 +85,7 @@ public class WebPhotoPreviewActivity extends AppCompatActivity
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);      // 给左上角图标的左边加上一个返回的图标
 
         mViewPager = findViewById(R.id.vp_web_preview_photos);
+        rlToolbar = findViewById(R.id.rl_web_photo_preview_toolbar);
         ivShare = findViewById(R.id.iv_web_photo_preview_share);
         ivDownLoad = findViewById(R.id.iv_web_photo_preview_download);
     }
@@ -92,7 +98,8 @@ public class WebPhotoPreviewActivity extends AppCompatActivity
         imgUrls = new ArrayList<>();
 
         ArrayList<String> urlArr = getIntent().getStringArrayListExtra(EXTRA_PHOTOS);      //获取已选图片
-        currentItem = getIntent().getIntExtra(EXTRA_CURRENT_ITEM, 0);                       //获取当前预览图片的下标
+        currentItem = getIntent().getIntExtra(EXTRA_CURRENT_ITEM, 0);           //获取当前预览图片的下标
+        showToolbar = getIntent().getBooleanExtra(EXTRA_SHOW_TOOLBAR, true);    //显示底部工具栏
 
         if (urlArr != null)
         {
@@ -106,6 +113,12 @@ public class WebPhotoPreviewActivity extends AppCompatActivity
 
         mViewPager.setCurrentItem(currentItem);     //跳转到指定页面
         mViewPager.setOffscreenPageLimit(5);        //设置预加载页面数量
+
+        if (showToolbar) {
+            rlToolbar.setVisibility(View.VISIBLE);
+        } else {
+            rlToolbar.setVisibility(View.GONE);
+        }
     }
 
     /**
