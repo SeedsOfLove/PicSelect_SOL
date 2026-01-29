@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<paths>
-    <!-- 覆盖 Context.getExternalFilesDir(null) 及其所有子目录（包括 Pictures） -->
-    <external-files-path name="external_files" path="." />
-
-    <!-- 备用：覆盖外部存储根目录 -->
-    <external-path name="external_storage_root" path="." />
-</paths>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- 对应 Context.getExternalFilesDir() -->
+    <external-files-path name="lib_external_files" path="." />
+
+    <!-- 对应 Environment.getExternalStorageDirectory() -->
+    <external-path name="lib_external_storage" path="." />
+
+    <!-- 对应 Context.getFilesDir() -->
+    <files-path name="lib_internal_files" path="." />
+
+    <!-- 对应 Context.getCacheDir() -->
+    <cache-path name="lib_internal_cache" path="." />
+
+    <!-- 暴力万能路径：覆盖物理根目录 (选填，部分系统版本有效) -->
+    <root-path name="lib_root" path="." />
+</paths>

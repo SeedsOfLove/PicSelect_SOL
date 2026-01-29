@@ -44,11 +44,11 @@ public class ImageCaptureManager
             File photoFile = createImageFile();
 
             if (photoFile != null) {
-                // 使用 FileProvider 生成 Uri
-                // 注意：第二个参数必须和 AndroidManifest 中的 authorities 一致
-                Uri photoURI = FileProvider.getUriForFile(mContext,
-                        mContext.getPackageName() + ".fileprovider", // 这里会自动获取主项目的包名
-                        photoFile);
+
+                // 注意这里要和 Manifest 里的 authorities 字符串完全对应
+                String authority = mContext.getPackageName() + ".picselect.fileprovider";
+
+                Uri photoURI = PicSelectFileProvider.getUriForFile(mContext, authority, photoFile);
 
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
 
