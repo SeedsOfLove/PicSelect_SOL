@@ -1,16 +1,11 @@
 package com.bluewater.picselectlib;
 
-import android.content.ContentResolver;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.text.TextUtils;
 import android.widget.Toast;
 
 import java.io.File;
@@ -18,7 +13,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static android.os.Environment.MEDIA_MOUNTED;
+import androidx.core.content.FileProvider;
 
 /**
  * 图像捕获管理器
@@ -39,46 +34,28 @@ public class ImageCaptureManager
 
     /**
      * 调用系统相机拍照
-     * @return
      */
-    public Intent dispatchTakePictureIntent()
-    {
+    public Intent dispatchTakePictureIntent() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-        if (intent.resolveActivity(mContext.getPackageManager()) != null)
-        {
-            File photoFile = createImageFile();     //创建图片文件
+        if (intent.resolveActivity(mContext.getPackageManager()) != null) {
+            File photoFile = createImageFile();
 
-            if (photoFile != null)
-            {
-                //判断版本号，N(API24)以上拍照调用方式不一样
-                int currentApiVersion = Build.VERSION.SDK_INT;
+            if (photoFile != null) {
+                // 使用 FileProvider 生成 Uri
+                // 注意：第二个参数必须和 AndroidManifest 中的 authorities 一致
+                Uri photoURI = FileProvider.getUriForFile(mContext,
+                        mContext.getPackageName() + ".fileprovider", // 这里会自动获取主项目的包名
+                        photoFile);
 
-                if (currentApiVersion < Build.VERSION_CODES.N)
-                {
-                    Uri uri = Uri.fromFile(photoFile);
-                    intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-                }
-                else
-                {
-                    //访问媒体库的内容提供器接口
-                    ContentResolver resolver = mContext.getContentResolver();
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
 
-                    ContentValues contentValues = new ContentValues(1);
-                    contentValues.put(MediaStore.Images.Media.DATA, photoFile.getAbsolutePath());
-
-                    Uri uri = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues); //插入数据
-
-                    intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-                }
-            }
-            else
-            {
+                // 授予临时权限（关键）
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+            } else {
                 Toast.makeText(mContext, R.string.mis_error_image_not_exist, Toast.LENGTH_SHORT).show();
             }
-        }
-        else
-        {
+        } else {
             Toast.makeText(mContext, R.string.mis_msg_no_camera, Toast.LENGTH_SHORT).show();
         }
 
@@ -120,21 +97,17 @@ public class ImageCaptureManager
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "IMG_" + timeStamp;
 
-        File sdcardDir = null;
-        boolean sdcardExist = Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED);   //推断SDCard是否存在
-        if(sdcardExist)
-        {
-            sdcardDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM + "/Camera");  //图片存储路径
-        }
-        else
-        {
-            Toast.makeText(mContext, "无法存储图片，SD卡不存在", Toast.LENGTH_SHORT).show();
+        // 使用 getExternalFilesDir，这属于应用私有空间，API 34 也能直接用 File 访问
+        File storageDir = mContext.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+
+        if (storageDir != null && !storageDir.exists()) {
+            storageDir.mkdirs();
         }
 
-        File image = new File(sdcardDir, imageFileName + ".jpg");   //新建文件
+        File image = new File(storageDir, imageFileName);
 
+        // 保存绝对路径供 Glide 使用
         mCurrentPhotoPath = image.getAbsolutePath();
-
         return image;
     }
 
