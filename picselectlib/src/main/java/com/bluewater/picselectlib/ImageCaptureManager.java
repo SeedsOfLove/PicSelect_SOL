@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.io.File;
@@ -39,6 +40,7 @@ public class ImageCaptureManager
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         if (intent.resolveActivity(mContext.getPackageManager()) != null) {
+
             File photoFile = createImageFile();
 
             if (photoFile != null) {
@@ -95,7 +97,7 @@ public class ImageCaptureManager
     {
         //文件名
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "IMG_" + timeStamp;
+        String imageFileName = "IMG_" + timeStamp + ".jpg";
 
         // 使用 getExternalFilesDir，这属于应用私有空间，API 34 也能直接用 File 访问
         File storageDir = mContext.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
@@ -108,6 +110,7 @@ public class ImageCaptureManager
 
         // 保存绝对路径供 Glide 使用
         mCurrentPhotoPath = image.getAbsolutePath();
+        Log.d("PhotoPicker", "生成的图片路径: " + mCurrentPhotoPath); // 加个日志看一眼
         return image;
     }
 
